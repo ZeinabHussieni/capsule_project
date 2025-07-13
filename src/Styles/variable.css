@@ -1,0 +1,28 @@
+:root {
+
+  --main-bg: #f7f7f7;
+  --soft-bg: #f0f0f0;
+  --dark-bg: #e0e0e0;
+  
+  --main-color: #333333;
+  --soft-color: #666666;
+  --dark-color: #000000;
+
+  --blue-glow: rgba(173, 216, 230, 0.4);
+}
+
+body.dark {
+
+  --main-bg: #2a3447;
+  --soft-bg: #384256;
+  --dark-bg: #222b3c;
+
+  --main-color: white;
+  --soft-color: #dddddd;
+  --dark-color: #2a3447;
+}
+
+body {
+  background-color: var(--main-bg);
+  color: var(--main-color);
+}
