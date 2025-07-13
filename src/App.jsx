@@ -4,7 +4,7 @@ import Register from "./Pages/Register/Register";
 import Navbar from "./Components/Shared/Navbar";
 import "./Styles/variable.css"
 import SideBar from "./Components/Shared/SideBar";
-import HomePage from "./Pages/Dashbored/Dashbored";
+import HomePage from "./Pages/HomePage/HomePage";
 import Welcome from "./Components/Landing/Welcome";
 import {
   Routes,
@@ -33,10 +33,7 @@ const MyRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/navbar" element={<Navbar/>} />
-      <Route path="/sidebar" element={<SideBar/>} />
       <Route path="/homePage" element={<HomePage/>} />
-      <Route path="/welcome" element={<Welcome/>} />
     </Routes>
   );
 };
