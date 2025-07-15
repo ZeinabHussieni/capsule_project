@@ -25,7 +25,7 @@
 .login-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   gap: 2rem;
   padding-top: 6rem; 
   flex-wrap: wrap;
@@ -35,123 +35,30 @@
 
 }
 
-.Animation {
+.login-animation {
   flex: 1;
   max-width: 550px;
   min-width: 300px;
 }
 
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-
 .login-form {
+  color: black;
   flex: 1;
   max-width: 370px;
-  height: 500px;
-  background: var(--main-bg);
+  height: 450px;
+  background: white;
   padding: 3rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 0.8rem;   
-  font-size: 1.4rem;       
-  font-weight: 600;  
-}
-
-.input-wrapper {
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 3.2rem; 
-  border: 1px solid #ccc;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
-
-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.60rem 1rem;   
-  border-radius: 5px;
-}
-
-.login-btn {
-  width: 30%;
-  padding: 0.70rem;
-  font-size: 1.2rem;
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  word-break: break-word; 
-}
-
-.login-btn:hover {
-  background-color: #2980b9;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sign_up{
   font-family: 'Great Vibes', cursive;
   font-size: 2rem;
   letter-spacing: 1px;
-}
-
-.circles {
-  position: absolute;
-  border-radius: 50%;
-  background: rgb(0, 75, 128);
-  filter: blur(90px);
-  opacity: 0.4;
-  z-index: 0;
-  animation: float 10s ease-in-out infinite alternate;
-}
-
-.circle1 {
-  width: 140px;
-  height: 190px;
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.circle2 {
-  width: 210px;
-  height: 210px;
-  top: 20%;
-  left: 80%;
-  animation-delay: 2s;
-}
-
-.circle3 {
-  width: 130px;
-  height: 130px;
-  top: 70%;
-  left: 50%;
-  animation-delay: 4s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 

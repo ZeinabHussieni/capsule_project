@@ -1,13 +1,13 @@
 :root {
 
-  --main-bg: #f7f7f7;
-  --soft-bg: #f0f0f0;
-  
+  --main-bg: #F7F7F7;
+  --soft-bg: #F8FBFF;
   --dark-bg: #e0e0e0;
   
   --main-color: #333333;
   --soft-color: #666666;
   --dark-color: #000000;
+  --button-bg:  rgba(77, 110, 205, 0.8);
 
   --blue-glow: rgba(173, 216, 230, 0.4);
 }

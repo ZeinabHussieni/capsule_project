@@ -1,0 +1,67 @@
+.capsules-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.capsule-title {
+  margin: 0;
+  font-family: 'Great Vibes';
+  font-size: 4.3rem;
+  color: var(--main-color);
+  text-align: center;
+  flex: 1;
+}
+
+.new-capsule-button {
+  position: absolute;
+  right: 0;
+  background-color: #b0ccff;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.new-capsule-button:hover {
+  background-color: #7ea6ff;
+  box-shadow: 0 4px 12px rgba(126, 166, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .capsules-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .capsule-title {
+    font-size: 3rem;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .new-capsule-button {
+    position: static;
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 1105px) {
+  .capsule-title {
+    font-size: 3rem;
+    margin-bottom: 0;
+    text-align: left;
+    margin-left: 20px;
+  }
+}

@@ -1,50 +1,32 @@
-import React, { useState } from "react";
-import RegisterCard from "../../Components/Landing/RegisterCard/RegisterCard";
-import RegisterAnimations from "../../Components/Landing/RegisterCard/RegitserAnimation";
-import "./Register.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import Circles from "../../Components/Shared/Circles/Circles";
+import RegisterCard from "../../Components/auth/register/RegisterForm";
+import RegisterAnimations from "../../Components/auth/register/RegisterAnimation";
+import "./register.css";
 
-
-const Login = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Logging in with:", firstName, lastName, email, password);
-  };
-
+const Register = () => {
   return (
     <div className="register-container-wrapper">
-        <div className="circles circle1"></div>
-        <div className="circles circle2"></div>
-        <div className="circles circle3"></div>
+ 
+      <Circles />
 
-       <div className="register-title-wrapper">
-         <h1 className="register-title">Start your journey to the future</h1>
-       </div>
-       <div className="register-container">
-         <RegisterCard
-             firstName={firstName}
-             setFirstName={setFirstName}
-             lastName={lastName}
-             setLastName={setLastName}
-             email={email}
-             setEmail={setEmail}
-             password={password}
-             setPassword={setPassword}
-             handleSubmit={handleSubmit}
-          />
-          <RegisterAnimations/>
+      <div className="register-title-wrapper">
+        <h1 className="register-title">Start your journey to the future</h1>
       </div>
+
+      <div className="register-container">
+        <RegisterCard />
+        <RegisterAnimations />
+      </div>
+
       <div className="back">
-        <p>Already have an account?<a href="/login">Login</a></p>
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
-   </div>
-
-
+    </div>
   );
 };
 
-export default Login;
+export default Register;

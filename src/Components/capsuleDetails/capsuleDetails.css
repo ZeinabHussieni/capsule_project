@@ -1,0 +1,92 @@
+.details-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: var(--font-family, Arial, sans-serif);
+}
+
+.details-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.details-image {
+  width: 50%;
+  height: 700px;
+  margin-top: 2rem;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid rgba(77, 110, 205, 0.2);
+  box-shadow: 0 0 20px rgba(77, 110, 205, 0.6); 
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.details-image:hover {
+  box-shadow: 0 0 35px rgba(77, 110, 205, 0.9), 0 0 60px rgba(77, 110, 205, 0.6);
+}
+
+.details-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.details-title {
+  margin: 0 0 1rem 0;
+  font-size: 3.4rem;
+  color: var(--main-color, #5c6bc0);
+  font-family: 'Great Vibes';
+}
+
+.details-message {
+  margin-top: 4rem;
+  flex-grow: 1;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.details-mood {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  color: var(--main-color, #5c6bc0);
+  margin-top: 5rem;
+}
+
+.details-mood .icon {
+  margin-right: 0.5rem;
+}
+
+.details-bottom-row {
+  justify-content: flex-end;
+  margin-left: 24rem;
+  font-size: 1.2rem;
+}
+
+.details-location, .details-date {
+  align-items: left;
+  margin-top: 1rem;
+}
+
+.details-location .icon, .details-date .icon {
+  margin-right: 0.4rem;
+}
+.voice-note-container {
+  margin-top: 3rem;
+  border-radius: 4px;
+  padding: 10px 14px;
+  border: 3px solid rgba(77, 110, 205, 0.2);
+  display: flex;
+  align-items: center;
+  width: 70%;
+  margin-left: 5rem;
+}
+
+.voice-note-container audio {
+  width: 100%;
+  outline: none;
+  background: transparent;
+}
