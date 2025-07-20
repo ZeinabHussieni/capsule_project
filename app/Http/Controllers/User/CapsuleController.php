@@ -7,30 +7,34 @@ use Illuminate\Http\Request;
 use  App\Services\User\CapsuleService;
 use App\Http\Controllers\Controller;
 
-
-
-
 class CapsuleController extends Controller{
 
-    function getAllCapsules(Request $request){
+    function getUserCapsules(){
+       $capsules = CapsuleService::getUserCapsule();
+       return $this->responseJSON($capsules);
+    }
+   
 
-        $id = $request->query('id');
-        $userId = $request->query('user_id');
-        $privacy = $request->query('privacy');
+    function getAllCapsules(){
+        $capsule= CapsuleService::getAllUsersCapsules();
+        return $this->responseJSON($capsule);
+    }
 
-        $capsules = CapsuleService::getAllCapsules($id, $userId, $privacy);
-        return $this->responseJSON($capsules);
+    function getCapsulesDetails($id){
+       $capsules = CapsuleService::getCapsuleDetails($id);
+       return $this->responseJSON($capsules);
     }
 
     function createOrUpdateCapsule(Request $request, $id = null){
         $data = $request->all();
-        $capsule = CapsuleService::createOrUpdateCapsule($data, $id);
+        $capsule = CapsuleService::createOrUpdateCapsule($request->all(), $id, $request);
+
         return $this-> responseJSON($capsule);
 
     }
 
-    function delete($id){
-        $result = CapsuleService::deleteCapsule($id);
+    function Delete($id){
+        $result = CapsuleService::delete($id);
   
         if ($result) {
            return $this->responseJSON(['status' => 'success', 'message' => 'Capsule deleted']);
@@ -39,6 +43,12 @@ class CapsuleController extends Controller{
         }
     }
 
+    public function filterCapsules(Request $request) {
 
-    
+        $filters = $request->only(['location', 'mood', 'tags']); 
+
+        $capsules = CapsuleService::filterCapsules($filters);
+        return $this-> responseJSON($capsules);
+    }
+   
 }
