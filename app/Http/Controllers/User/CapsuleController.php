@@ -25,13 +25,11 @@ class CapsuleController extends Controller{
        return $this->responseJSON($capsules);
     }
 
-    function createOrUpdateCapsule(Request $request, $id = null){
-        $data = $request->all();
-        $capsule = CapsuleService::createOrUpdateCapsule($request->all(), $id, $request);
-
-        return $this-> responseJSON($capsule);
-
+    function getSurpriseMood(){
+        $capsule= CapsuleService::getSurpriseMood();
+        return $this->responseJSON($capsule);
     }
+
 
     function Delete($id){
         $result = CapsuleService::delete($id);
@@ -43,12 +41,5 @@ class CapsuleController extends Controller{
         }
     }
 
-    public function filterCapsules(Request $request) {
-
-        $filters = $request->only(['location', 'mood', 'tags']); 
-
-        $capsules = CapsuleService::filterCapsules($filters);
-        return $this-> responseJSON($capsules);
-    }
    
 }

@@ -22,6 +22,7 @@ class Capsule extends Model
     'ip_address',
     'image',
     'audio_path',
+    'text_file',
     'color',
     'mood',
     'surprise_mood',
