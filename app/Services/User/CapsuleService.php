@@ -7,64 +7,74 @@ use App\Models\Capsule;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
+
 class CapsuleService{
 
+static function getUserCapsule(){
+    self::convertPrivacy(); 
 
-  static function getUserCapsule(){
+    $userId = auth()->id();
 
-    $capsules= Capsule::all();
+    return Capsule::where('user_id', $userId)
+                  ->where('surprise_mood', 0)
+                  ->get();
+}
 
-    $capsule = self::convertPrivacy($capsules);
 
-    $userId= auth()->id();//this id from token
+static function getAllUsersCapsules() {
+      self::convertPrivacy(); 
 
-    return $capsule-> where('user_id', $userId)
-                        ->where('surprise_mood', false)
-                        ->values();
-  }
+    $userId = auth()->id(); 
 
-  static function getSurpriseMood(){
+    return Capsule::where('user_id', $userId)
+        ->where('privacy', 'public')
+        ->where('is_revealed', 1)
+        ->get();
 
-    $capsule= Capsule::all();
+}
 
-    $userId= auth()->id();
-    
-    return $capsule-> where('user_id', $userId)
-                   ->where('surprise_mood',true)
-                   ->values();
-  }
- 
-  static function getAllUsersCapsules() {
-    $capsules= Capsule::all();
+static function getSurpriseMood(){
+    $userId = auth()->id();
 
-    $capsule = self::convertPrivacy($capsules);
+    return Capsule::where('user_id', $userId)
+                  ->where('surprise_mood', true)
+                  ->get();
+}
 
-    return $capsule->where('privacy', 'public')
-                     ->where('surprise_mood', false)
-                     ->values();
-  }
 
-  static function getCapsuleDetails($id){
-    $capsule= Capsule::find($id);
-    return $capsule;
-  }
 
-  static function convertPrivacy(Collection $capsules){
+static function getCapsuleDetails($id){
+    return Capsule::find($id);
+}
+static public function convertPrivacy() {
+    date_default_timezone_set('Asia/Beirut');
     $now = Carbon::now();
 
-    foreach($capsules as $capsule){
-      if($capsule->reveal_date <= now()){
-        $capsule->privacy='public';
-        $capsule->is_revealed= true;
-        $capsule->surprise_mood = false;
+    $capsules = Capsule::with('user')
+                ->where('is_revealed', 0)
+                ->where('reveal_date', '<=', $now)
+                ->get();
 
-        $capsule->save();
-      }
+    if ($capsules->isEmpty()) {
+        return "No capsules found to convert.";
     }
 
-    return $capsules;
-  }
- 
+    foreach ($capsules as $capsule) {
+      
+        $capsule->is_revealed = 1;
+        $capsule->privacy = 'public';
+        $capsule->save();
+
+       
+        if ($capsule->user && filter_var($capsule->user->email, FILTER_VALIDATE_EMAIL)) {
+            \Mail::to($capsule->user->email)->send(new \App\Mail\CapsuleRevealMail($capsule));
+        }
+    }
+
+    return "Done updating and emailing " . $capsules->count() . " capsules.";
+}
+
+
   static function delete($id){
     if(!$id) {
       return false;  

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Models\Capsule;
 use Illuminate\Http\Request;
 use  App\Services\User\CapsuleService;
@@ -41,5 +40,18 @@ class CapsuleController extends Controller{
         }
     }
 
-   
+function getAllUsersCapsules(CapsuleService $service) {
+    $service->convertPrivacy();
+
+    $userId = auth()->id(); 
+
+    $capsules = Capsule::where('user_id', $userId)
+        ->where('privacy', 'public')
+        ->where('is_revealed', 0)
+        ->get();
+
+    return $this->responseJSON($capsules);
+}
+
+
 }
