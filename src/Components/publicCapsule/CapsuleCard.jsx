@@ -1,7 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCalendarDay, FaMapMarkerAlt, FaSmile } from "react-icons/fa";
-
 import Button from "../../Components/Shared/Button/index";
 import "./capsuleCard.css";
 
@@ -9,9 +7,7 @@ const CapsuleCard = ({ capsule }) => {
   const navigate = useNavigate();
   if (!capsule) return null;
 
-  const imageUrl = capsule.coverImage;
-
-  const formattedDate = new Date(capsule.revealDate).toLocaleString("en-US", {
+  const formattedDate = new Date(capsule.reveal_date).toLocaleString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -21,41 +17,51 @@ const CapsuleCard = ({ capsule }) => {
   });
 
   return (
-    <div className="public-card">
-      {imageUrl && (
-        <img src={imageUrl} alt="Capsule" className="public-card-image" />
-      )}
+    <div
+      className="public-card"
+      style={{ border: `2px solid ${capsule.color || "rgba(77, 110, 205, 0.2)"}` }}
+    >
+      <img
+        src={`http://127.0.0.1:8000/${capsule.image}`}
+        alt="Capsule"
+        className="public-card-image"
+      />
 
       <div className="public-card-body">
         <h3 className="public-card-title">{capsule.title}</h3>
 
         <div className="public-card-info-row">
-          <FaCalendarDay className="public-card-icon" />
+          <img src="/icon/calender.svg" alt="Calendar Icon" className="details-icon" />
           <p>
             <strong>Reveal Date:</strong> {formattedDate}
           </p>
         </div>
 
         <div className="public-card-info-row">
-          <FaMapMarkerAlt className="public-card-icon" />
+          <img src="/icon/location.svg" alt="Location Icon" className="details-icon" />
           <p>
             <strong>Location:</strong> {capsule.location}
           </p>
         </div>
 
         <div className="public-card-info-row">
-          <FaSmile className="public-card-icon" />
+          <img src="/icon/emoji.svg" alt="Emoji Icon" className="details-icon" />
           <p>
             <strong>Mood:</strong> {capsule.mood}
           </p>
         </div>
 
+        <div className="public-card-info-row">
+          <img src="/icon/tags.svg" alt="Tags Icon" className="details-icon" />
+          <p>
+            <strong>Tags:</strong> {capsule.tags}
+          </p>
+        </div>
+
         <Button
-          className="learn-more"
+          className="Public-learn-more"
           text="Learn More"
-          onClickListener={() =>
-            navigate("/capsulesDetails", { state: { capsule } })
-          }
+          onClickListener={() => navigate("/capsulesDetails", { state: { capsule } })}
         />
       </div>
     </div>

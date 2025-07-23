@@ -17,8 +17,8 @@ const CapsuleHeader = () => {
         onClickListener={() => navigate("/createCapsule")}
         text={
           <>
-            <FaPlus className="input-icon" />
-            <span style={{ marginLeft: "0.5rem" }}>New Capsule</span>
+            <img src="/icon/plus.svg" alt="Title Icon" className="input-icon" />
+            <span>New Capsule</span>
           </>
         }
       />

@@ -1,14 +1,16 @@
 import "./Styles/App.css";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
-import "./Styles/variable.css"
 import HomePage from "./Pages/HomePage/HomePage";
 import PrivateCapsulePage from "./Pages/PrivateCapsulePage/PrivateCapsulePage";
-import SideBar from "./Components/Shared/SideBar/SideBar";
 import AppLayout from "./Components/Shared/Layouts/AppLayout";
 import PublicCapsules from "./Pages/PublicCapsules/PublicCapsules"
 import CapsulesDetails from "./Pages/CapsuleDetailsPage/CapsuleDetailsPage";
 import CreateCapsule from "./Pages/CreateCapsule/CreateCapsule";
+import UpdateCapsule from "./Components/updateCapsule/UpdateCapsule";
+import UnlistedPage from "./Pages/UnlistedPage/UnlistedPage"
+import Map from "./Components/map/Map";
+import "./Styles/variable.css"
 
 import {
   Routes,
@@ -21,7 +23,6 @@ const App = () => {
 
   return (
     <div className="App">
-    {/*{discluded.every((route) => route !== location.pathname) && <SideBar />}*/}
       <MyRoutes />
     </div>
   );
@@ -40,6 +41,9 @@ const MyRoutes = () => {
           <Route path="/publiccapsules" element={<PublicCapsules />} />
           <Route path="/capsulesDetails" element={<CapsulesDetails />} />
           <Route path="/createCapsule" element={<CreateCapsule />} />
+          <Route path="/update_capsule" element={<UpdateCapsule />} />
+          <Route path="/unlisted_page" element={<UnlistedPage />} />
+          <Route path="/map" element={<Map />} />
 
         </Route>
       </Routes>

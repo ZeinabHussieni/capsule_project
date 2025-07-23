@@ -1,11 +1,17 @@
 .public-card {
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
   border-radius: 12px;
   overflow: hidden;
   background: var(--soft-bg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+  margin: 1rem auto;
   border: 2px solid rgba(77, 110, 205, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.public-card:hover {
+  transform: scale(1.02);
 }
 
 .public-card-image {
@@ -14,8 +20,20 @@
   object-fit: cover;
 }
 
+.public-card-body {
+  padding: 0.8rem 1rem 1rem 1rem;
+}
+
+.public-card-title {
+  font-size: 1.4rem;
+  color: var(--main-color);
+  margin-top: -5px;
+  margin-bottom: 1.2rem;
+}
+
 .public-card-info-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   color: var(--text-color);
   font-size: 1rem;
@@ -35,15 +53,73 @@
   margin: 0;
   line-height: 1.2;
   display: flex;
+  align-items: center;
+  flex: 1;
 }
 
-.public-card-body {
-  padding: 0.8rem 0.5rem 1rem 0.5rem;
+.details-icon{
+  width: 24px;
+  height: 24px;
 }
 
-.public-card-title {
-  font-size: 1.4rem;
-  color: var(--main-color);
-  margin-top: -5px;
-  margin-bottom: 1.2rem;
+.filter-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.Public-learn-more{
+  align-self: center;
+  margin-top: auto;
+  padding: 0.4em 1rem;
+  font-size: 1rem;
+  background-color: var(--button-bg);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Public-learn-more:hover {
+  background-color: #7ea6ff;
+}
+
+@media (max-width: 768px) {
+  .public-card {
+    margin: 1rem auto;
+    max-width: 90%;
+  }
+
+  .public-card-title {
+    font-size: 1.2rem;
+  }
+
+  .public-card-image {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .public-card {
+    max-width: 95%;
+    border-radius: 10px;
+  }
+
+  .public-card-image {
+    height: 140px;
+  }
+
+  .public-card-title {
+    font-size: 1rem;
+  }
+
+  .public-card-info-row {
+    font-size: 0.9rem;
+  }
+
+  .public-card-icon {
+    font-size: 1.2rem;
+  }
 }

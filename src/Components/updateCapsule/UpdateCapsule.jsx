@@ -1,34 +1,30 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../../Components/Shared/Button";
-import Input from "../../Components/Shared/Input";
-import MediaUpload from "./MediaUpload";
+import React, { useState, useEffect } from "react";
+import Button from "../../Components/Shared/Button/index";
+import MediaUpload from "../createCapsule/MediaUpload";
 import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import "../createCapsule/createForm.css";
 
-import "./createForm.css";
 
-const CreateForm = () => {
-  const navigate = useNavigate();
-
- 
+const UpdateCapsule = () => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [privacy, setPrivacy] = useState("");
   const [reveal_date, setReveal_date] = useState("");
-  const [tags, setTags] = useState("");
+  const [imageBase64, setImageBase64] = useState(null);
+  const [audio_path, setAudio_path] = useState("");
   const [color, setColor] = useState("#ffffff");
   const [mood, setMood] = useState("");
   const [surpriseMood, setSurpriseMood] = useState(false);
+  const [tags, setTags] = useState("");
+  const [selectedMood, setSelectedMood] = useState("");
   const [surpriseEnabled, setSurpriseEnabled] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  
-  const [imageBase64, setImageBase64] = useState(null);
-  const [audio_path, setAudio_path] = useState("");
-  const [text_file, setText_file] = useState("");
+  const location = useLocation();
+  const { id } = location.state;
 
-
-  const [selectedMood, setSelectedMood] = useState("");
+  const navigate = useNavigate();
 
   const moods = [
     { emoji: "😊", label: "Happy" },
@@ -40,7 +36,37 @@ const CreateForm = () => {
     { emoji: "🥺", label: "Nostalgic" },
   ];
 
-  const handleCreate = async (e) => {
+  useEffect(() => {
+    const fetchCapsule = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/v0.1/user/capsule_details/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        const capsule = response.data.payload;
+
+        setTitle(capsule.title);
+        setMessage(capsule.message);
+        setPrivacy(capsule.privacy);
+        setReveal_date(capsule.reveal_date);
+        setColor(capsule.color);
+        setMood(capsule.mood);
+        setSurpriseEnabled(capsule.surprise_mood === 1);
+        setTags(capsule.tags);
+       
+      } catch (error) {
+        alert("Failed to load capsule");
+      }
+    };
+
+    fetchCapsule();
+  }, [id]);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
@@ -56,11 +82,10 @@ const CreateForm = () => {
     formData.append("surprise_mood", surpriseEnabled ? 1 : 0);
     formData.append("image", imageBase64);
     formData.append("audio", audio_path);
-    formData.append("file", text_file);
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/v0.1/user/create_or_update",
+        `http://127.0.0.1:8000/api/v0.1/user/create_or_update/${id}`,
         formData,
         {
           headers: {
@@ -69,8 +94,7 @@ const CreateForm = () => {
           },
         }
       );
-
-      setSuccessMessage("Capsule created successfully!");
+      setSuccessMessage("Capsule updated successfully!");
       navigate("/usercapsule");
     } catch (error) {
       setSuccessMessage(error.response?.data?.message || "Something went wrong");
@@ -78,21 +102,24 @@ const CreateForm = () => {
   };
 
   return (
-    <form className="create-form">
-      <h2 className="create-title">Create your capsule</h2>
+    <form className="create-form" onSubmit={handleUpdate}>
+      <h2 className="create-title">Update your capsule</h2>
 
-     
+
       <div className="create-input-row">
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/title.svg" alt="Title Icon" className="create-icon" />
-            <label htmlFor="title" className="create-label-size">Title</label>
+            <label htmlFor="title" className="create-label-size">
+              Title
+            </label>
           </div>
           <div className="create-input-wrapper">
-            <Input
+            <input
               name="title"
-              hint="e.g. A letter to my future self"
-              onChangeListener={(e) => setTitle(e.target.value)}
+              value={title}
+              placeholder="e.g. A letter to my future self"
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
         </div>
@@ -100,45 +127,49 @@ const CreateForm = () => {
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/calender.svg" alt="Calendar Icon" className="create-icon" />
-            <label htmlFor="reveal_date" className="create-label-size">Reveal Date</label>
+            <label htmlFor="reveal_date" className="create-label-size">
+              Reveal Date
+            </label>
           </div>
           <div className="create-input-wrapper">
-            <Input
+            <input
               type="datetime-local"
               name="reveal_date"
-              hint="e.g 08/15/2026"
-              onChangeListener={(e) => setReveal_date(e.target.value)}
+              value={reveal_date}
+              placeholder="e.g 08/15/2026"
+              onChange={(e) => setReveal_date(e.target.value)}
             />
           </div>
         </div>
       </div>
 
-     
+      
       <div className="create-input-row">
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/attach.svg" alt="Upload Icon" className="create-icon" />
-            <label htmlFor="mediaUpload" className="create-label-size">Media Upload</label>
+            <label htmlFor="mediaUpload" className="create-label-size">
+              Media Upload
+            </label>
           </div>
           <div className="create-input-wrapper">
-            <MediaUpload
-              setImageBase64={setImageBase64}
-              setAudio_path={setAudio_path}
-              setText_file={setText_file}
-            />
+            <MediaUpload setImageBase64={setImageBase64} setAudio_path={setAudio_path} />
           </div>
         </div>
 
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/tags.svg" alt="Tag Icon" className="create-icon" />
-            <label htmlFor="tags" className="create-label-size">Tags</label>
+            <label htmlFor="tags" className="create-label-size">
+              Tags
+            </label>
           </div>
           <div className="create-input-wrapper">
-            <Input
+            <input
               name="tags"
-              hint="e.g. travel, summer, memories"
-              onChangeListener={(e) => setTags(e.target.value)}
+              value={tags}
+              placeholder="e.g. travel, summer, memories"
+              onChange={(e) => setTags(e.target.value)}
             />
           </div>
         </div>
@@ -148,13 +179,16 @@ const CreateForm = () => {
       <div className="create-input-group">
         <div className="create-label">
           <img src="/icon/pencil.svg" alt="Pencil Icon" className="create-icon" />
-          <label htmlFor="message" className="create-label-size">Message</label>
+          <label htmlFor="message" className="create-label-size">
+            Message
+          </label>
         </div>
         <div className="create-textarea-wrapper">
           <textarea
             name="message"
-            className="create-textarea"
+            value={message}
             placeholder="Write something to your future self..."
+            className="create-textarea"
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
@@ -162,27 +196,30 @@ const CreateForm = () => {
 
       
       <div className="create-row-3">
-        
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/security.svg" alt="Privacy Icon" className="create-icon" />
-            <label htmlFor="privacy" className="create-label-size">Privacy</label>
+            <label htmlFor="privacy" className="create-label-size">
+              Privacy
+            </label>
           </div>
           <select
             name="privacy"
+            value={privacy}
             onChange={(e) => setPrivacy(e.target.value)}
             className="select-input"
           >
             <option value="">Select Privacy</option>
             <option value="public">Public</option>
             <option value="private">Private</option>
-            <option value="unlisted">Unlisted</option>
+            <option value="unlist">Unlist</option>
           </select>
         </div>
 
-       
         <div className="color-picker-group">
-          <label htmlFor="color" className="create-label-size">Color</label>
+          <label htmlFor="color" className="create-label-size">
+            Color
+          </label>
           <div className="color-picker-wrapper">
             <input
               type="color"
@@ -194,42 +231,40 @@ const CreateForm = () => {
           </div>
         </div>
 
-        
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/emoji.svg" alt="Emoji Icon" className="create-icon" />
             <label className="create-label-size">Mood</label>
           </div>
           <select
+            className="select-input"
             name="mood"
             value={mood}
             onChange={(e) => {
               setMood(e.target.value);
               setSelectedMood(e.target.value);
             }}
-            className="select-input"
           >
             <option value="">Select Mood</option>
-            {moods.map((moodemoji, i) => (
-              <option key={i} value={moodemoji.label}>
-                {moodemoji.emoji} {moodemoji.label}
+            {moods.map(({ emoji, label }, i) => (
+              <option key={i} value={label}>
+                {emoji} {label}
               </option>
             ))}
           </select>
         </div>
 
-        
         <div className="create-input-group">
           <div className="create-label">
             <img src="/icon/gift.svg" alt="Gift Icon" className="create-icon" />
             <label className="create-label-size">Surprise Mood</label>
           </div>
           <div className="toggle-wrapper">
-            <span className="toggle-label">{surpriseEnabled ? "on" : "off"}</span>
+            <span className="toggle-label">{surpriseEnabled ? "On" : "Off"}</span>
             <div
               className={`toggle-switch ${surpriseEnabled ? "active" : ""}`}
               onClick={() => {
-                setSurpriseMood(!surpriseEnabled ? "surprise" : "");
+                setSurpriseMood(surpriseEnabled ? "" : "surprise");
                 setSurpriseEnabled(!surpriseEnabled);
               }}
             />
@@ -237,10 +272,9 @@ const CreateForm = () => {
         </div>
       </div>
 
-      
-      <Button text="Create Capsule" onClickListener={handleCreate} />
+      <Button text="Update Capsule" onClickListener={handleUpdate} />
     </form>
   );
 };
 
-export default CreateForm;
+export default UpdateCapsule;

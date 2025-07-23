@@ -11,8 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-   // localStorage.removeItem("token");
-   // sessionStorage.clear();
+   localStorage.removeItem("token");
    navigate("/login");
   };
 

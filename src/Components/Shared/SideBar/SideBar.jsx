@@ -7,8 +7,7 @@ const SideBar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-   // localStorage.removeItem("token");
-   // sessionStorage.clear();
+   localStorage.removeItem("token");
    navigate("/login");
   };
 
@@ -17,7 +16,9 @@ const SideBar = () => {
       <div className="sidebar-links">
         <Link to="/homePage"><p>Home</p></Link>
         <Link to="/usercapsule"><p>View Your Capsules</p></Link>
-        <Link to="/publiccapsules"><p>View Capsules</p></Link>
+        <Link to="/publiccapsules"><p>Explore Public Capsules</p></Link>
+        <Link to="/unlisted_page"><p>Secret Capsules</p></Link>
+        <Link to="/map"><p>Capsules Map</p></Link>
       </div>
 
       <div className="sidebar-logout">

@@ -6,7 +6,6 @@ const CreateCapsule = () => {
   return (
     <>
       <CreateHeader/>
-
     </>
   );
 };
