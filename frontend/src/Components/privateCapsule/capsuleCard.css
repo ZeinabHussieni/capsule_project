@@ -1,0 +1,125 @@
+.user-card {
+  background: var(--soft-bg);
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 322px;
+  height: 652px;
+  height: auto;
+  margin: 1rem auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: 2px solid rgba(77, 110, 205, 0.2);
+}
+
+.card-header {
+  background-color: #b0ccff;
+  padding: 1.2rem;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  color: var(--main-color);
+  margin: 0;
+}
+
+.card-body {
+  padding: 1.2rem;
+  background: var(--soft-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.card-info {
+  font-size: 1rem;
+  color: var(--soft-color);
+  display: flex;            
+  align-items: center;                
+}
+
+.card-label {
+  font-weight: 500;
+}
+
+
+.input-icon {
+  width: 25px;
+  height: 30px;
+}
+.card-buttons {
+  margin-top: 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  flex-wrap: nowrap;
+}
+
+.delete-button,
+.learn-more,
+.update-button {
+  padding: 0.2rem 0.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 0; 
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  flex: 1;  
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.delete-button {
+  background-color: #ef4444;
+  color: white;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+}
+
+.delete-button:hover {
+  background-color: #b91c1c;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.6);
+}
+
+.learn-more {
+  background-color: #b0ccff;
+  color: white;
+  box-shadow: 0 2px 6px rgba(176, 204, 255, 0.4);
+}
+
+.learn-more:hover {
+  background-color: #7ea6ff;
+  box-shadow: 0 4px 12px rgba(126, 166, 255, 0.6);
+}
+
+.update-button {
+  background-color: #90b7ff;
+  color: white;
+  box-shadow: 0 2px 6px rgba(176, 204, 255, 0.4);
+}
+
+.update-button:hover {
+  background-color: #739cf5;
+  box-shadow: 0 4px 12px rgba(126, 166, 255, 0.6);
+}
+@media (max-width: 400px) {
+  .card-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .delete-button,
+  .learn-more {
+    max-width: 100%;
+    min-width: unset;
+    flex: unset;
+  }
+}

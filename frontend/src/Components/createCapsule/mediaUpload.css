@@ -1,0 +1,92 @@
+.media-upload-container {
+  width: 85%;
+  padding: 0.57rem;
+  border-radius: 6px;
+  border: 1px solid #53a9f0;
+  margin-right: 60px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  margin-top: 0.08rem;
+}
+
+.media-upload-box {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.media-upload-container:hover{
+  border: 2px solid var(--button-bg);
+}
+
+.media-upload-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+}
+
+.media-upload-icon-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.audio-upload-wrapper {
+  position: relative;
+}
+
+.audio-menu {
+  position: absolute;
+  top: 45px;
+  left: -10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.audio-menu-item {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+  width: 150px;
+  transition: background-color 0.2s ease;
+}
+
+.audio-menu-item:hover {
+  background-color: var(--button-bg);
+  color: white;
+}
+
+.selected-file-name {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1030px) {
+  .media-upload-container{
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .media-upload-container  {
+    width: 100%;
+  }
+
+}
