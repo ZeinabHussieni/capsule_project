@@ -21,6 +21,4 @@ class AuthController extends Controller{
         return $this->responseJSON($user);
     }
 
-  
-
 }

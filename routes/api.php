@@ -16,14 +16,19 @@ Route::group(["prefix" =>"v0.1"], function(){
             Route::delete("/delete/{id?}", [CapsuleController::class, "Delete"]);
             Route::get("/capsule_details/{id}", [CapsuleController::class, "getCapsulesDetails"]);
             Route::get("/surprise_mood", [CapsuleController::class, "getSurpriseMood"]);
-
-
+            Route::get("/unlisted-link/{id}", [CapsuleController::class, "getUnlistedCapsuleLink"]);
         });
     });
+
 
    Route::group(["prefix" => 'guest'], function(){
      Route::post("/login",[AuthController::class, "login"]);
      Route::post("/register", [AuthController::class, "register"]);
    });
 
+   Route::group(["prefix" => 'public'], function(){
+     Route::get('/unlisted/{id}', [CapsuleController::class, 'showUnlistedCapsule']);
+   });
+
+  
 });

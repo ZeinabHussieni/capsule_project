@@ -27,6 +27,7 @@ class Capsule extends Model
     'mood',
     'surprise_mood',
     'tags',
+    'unlisted_token',
   ];
       public function user()
 {

@@ -39,7 +39,6 @@ class SendCapsuleRevealEmails extends Command
     foreach ($capsules as $capsule) {
         if ($capsule->user && filter_var($capsule->user->email, FILTER_VALIDATE_EMAIL)) {
             \Mail::to($capsule->user->email)->send(new \App\Mail\CapsuleRevealMail($capsule));
-            $capsule->privacy = 'public';
             $capsule->is_revealed = true;
             $capsule->save();
 
