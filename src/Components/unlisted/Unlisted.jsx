@@ -9,6 +9,7 @@ function CapsuleSearch() {
   const [searchLink, setSearchLink] = useState("");
   const [capsule, setCapsule] = useState(null);
   const [error, setError] = useState("");
+  
 
   const handleSearch = async () => {
     try {
@@ -86,8 +87,9 @@ function CapsuleSearch() {
                 />
               </div>
 
-              <div className="details-mood">
-                <img src="/icon/file.svg" alt="File Icon" className="user-icon" />
+              {capsule.text_file && (
+              <div className="file">
+                <img src="/icon/file.svg" alt="file Icon" className="user-icon" />
                 <a
                   href={`http://127.0.0.1:8000/storage/public/${capsule.text_file}`}
                   target="_blank"
@@ -96,6 +98,7 @@ function CapsuleSearch() {
                   View File
                 </a>
               </div>
+            )}
 
               <div className="details-mood">
                 <img src="/icon/emoji.svg" alt="Emoji Icon" className="user-icon" />

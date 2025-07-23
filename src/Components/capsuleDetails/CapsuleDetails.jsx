@@ -11,6 +11,7 @@ const CapsulesDetails = () => {
   const location = useLocation();
   const capsule = location.state?.capsule;
   const componentRef = useRef();
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [unlistedLink, setUnlistedLink] = useState("");
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,7 @@ const CapsulesDetails = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(unlistedLink).then(() => {
-      alert("Unlisted link copied to clipboard!");
+      setSuccessMessage("Unlisted link copied to clipboard!");
     });
   };
 
@@ -141,6 +142,10 @@ const CapsulesDetails = () => {
             </div>
           </div>
         </div>
+
+        {successMessage && (
+          <p className="success-message">{successMessage}</p>
+        )}
 
         {capsule.privacy === "unlisted" && (
           <div className="unlisted-link-container">
